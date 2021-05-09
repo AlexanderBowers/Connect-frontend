@@ -3,10 +3,17 @@ import Form from 'react-bootstrap/Form'
 //import FormFile from 'react-bootstrap/FormFile'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import { Redirect } from "react-router-dom";
 
+class Home extends Component {
 
-
-class Signup extends Component {
+    componentDidMount(){
+        let token = localStorage.getItem('token')
+        if (token) {
+          this.props.history.push("/parties")
+          console.log('should be redirected')
+        }
+      }
 
     render () {
         return (
@@ -29,34 +36,6 @@ class Signup extends Component {
                 </div>
         )
     }
-
-    // render() {
-    //     return(
-    //         <div className="Login-container">
-    //             <h5>Welcome to Connect!</h5>
-    //             <Container>
-    //             <Form>
-    //                 <Form.Label> Signup</Form.Label>
-    //                 <Form.Group >
-    //                     <Form.Label>Username</Form.Label>
-    //                     <Form.Control name="username" placeholder="Enter username" onChange={(e) => this.props.handleLoginChange(e)}/>
-    //                 </Form.Group>
-
-    //                 <Form.Group controlId="formBasicPassword">
-    //                     <Form.Label>Password</Form.Label>
-    //                     <Form.Control name="password" type="password" placeholder="Password" onChange={(e) => this.props.handleLoginChange(e)}/>
-    //                 </Form.Group>
-    //                 <div className="buttons">
-    //                 <Button variant="success" type="button" className="create" onClick={(e) => this.props.handleSignupSubmit(e)}>
-    //                 </Button>
-    //                 <Button variant="primary" type="button" className="signin" onClick={(e) => this.props.toggleLogin(e)}>
-    //                 </Button>
-    //                 </div>
-    //             </Form>
-    //             </Container>
-    //         </div>
-    //     )
-    // }
 }
 
-export default Signup
+export default Home

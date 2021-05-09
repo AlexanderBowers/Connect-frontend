@@ -12,14 +12,9 @@ class App extends Component {
   
   state = {
     openParty: "",
-    parties: []
-  }
-
-  componentDidMount(){
-    let token = localStorage.getItem('token')
-    if (token) {
-      return <Redirect to="/parties"/>
-    }
+    parties: [],
+    gameFilter: "",
+    activityFilter: ""
   }
 
   handleUserInfo = (userId) => {
@@ -55,8 +50,8 @@ class App extends Component {
             userId: json.user.id
         })
         localStorage.setItem("token", json.jwt) 
-        localStorage.setItem("user",json.user.id)
-        return <Redirect to="/parties"/>
+        localStorage.setItem("user",json.user.id);
+        <Redirect to='/parties'/>
      }
      else{ 
        this.setState({error: json.message})
@@ -86,8 +81,8 @@ class App extends Component {
           loggedIn: !this.state.loggedIn,
         })
         localStorage.setItem("token", json.jwt)
-        localStorage.setItem("user",json.user.id)
-        return <Redirect to="parties"/>
+        localStorage.setItem("user",json.user.id);
+        <Redirect to='/parties'/>
       })
     }
     else {
