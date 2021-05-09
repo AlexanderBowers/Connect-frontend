@@ -12,6 +12,7 @@ class App extends Component {
   
   state = {
     openParty: "",
+    parties: []
   }
 
   componentDidMount(){
@@ -35,7 +36,7 @@ class App extends Component {
     let username = this.state.username
     let password = this.state.password
     let info = {username: username, password: password}
-    fetch("https://localhost:3000/login",{
+    fetch("http://localhost:3000/login",{
       method: "POST",
       headers: {
         "Content-Type" : "application/json",
@@ -55,7 +56,7 @@ class App extends Component {
         })
         localStorage.setItem("token", json.jwt) 
         localStorage.setItem("user",json.user.id)
-        this.props.history.push("/parties")
+        return <Redirect to="/parties"/>
      }
      else{ 
        this.setState({error: json.message})
@@ -68,7 +69,7 @@ class App extends Component {
     let password = this.state.password
     if (username && password){
       let info = {username: username, password: password}
-      fetch("https://localhost:3000/signup",{
+      fetch("http://localhost:3000/signup",{
         method: "POST",
         headers: {
           "Content-Type" : "application/json",
@@ -86,7 +87,7 @@ class App extends Component {
         })
         localStorage.setItem("token", json.jwt)
         localStorage.setItem("user",json.user.id)
-        this.props.history.push("/parties")
+        return <Redirect to="parties"/>
       })
     }
     else {
@@ -104,7 +105,7 @@ class App extends Component {
       <div className="Header">
         <NavigationBar signOut={this.signOut}/>
         <Route exact path='/' render={routerProps => <Home {...routerProps} handleUserInfo={this.handleUserInfo} handleLoginSubmit={this.handleLoginSubmit}
-         handleLoginChange={this.handleLoginChange} />   } />
+        handleLoginChange={this.handleLoginChange} handleSignupSubmit={this.handleSignupSubmit}/> } />
         <Route exact path='/profile' render={routerProps => <Profile {...routerProps} /> } />
         <Route exact path='/parties' render={routerProps => <Parties {...routerProps} openParty={this.state.openParty}  />} />
       </div>

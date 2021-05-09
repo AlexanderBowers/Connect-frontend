@@ -24,7 +24,7 @@ class Signup extends Component {
                             </Form.Group>
                         </Form>
                     </Container>
-                    <Button variant="primary" type="button" onClick={(e) => this.props.toggleLogin(e)}>Sign in</Button>
+                    <Button variant="primary" type="button" onClick={(e) => this.props.handleLoginSubmit(e)}>Sign in</Button>
                     <Button variant="success" type="button" className="create" onClick={(e) => this.props.handleSignupSubmit(e)}>Sign Up</Button>
                 </div>
         )
