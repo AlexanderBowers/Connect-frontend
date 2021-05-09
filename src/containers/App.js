@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import NavigationBar from '../components/NavigationBar'
 import Home from './Home'
+import Profile from './Profile'
 
 class App extends Component {
 
@@ -21,7 +22,7 @@ class App extends Component {
         <NavigationBar signOut={this.signOut}/>
         <Route exact path='/' render={routerProps => <Home {...routerProps}/>  } />
         <Route exact path='/profile' render={routerProps => <Profile {...routerProps} /> } />
-        <Route exact path='/login' render={routerProps => <HomeContainer {...routerProps} handleUserInfo={this.handleUserInfo} />} />
+        <Route exact path='/parties' render={routerProps => <Parties {...routerProps} openParty={this.state.openParty}  />} />
       </div>
     </Router>
   );
