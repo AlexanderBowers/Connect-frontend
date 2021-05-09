@@ -9,6 +9,10 @@ import Parties from './Parties'
 import { Redirect } from "react-router-dom";
 
 class App extends Component {
+  
+  state = {
+    openParty: "",
+  }
 
   componentDidMount(){
     let token = localStorage.getItem('token')
@@ -17,8 +21,14 @@ class App extends Component {
     }
   }
 
-  state = {
-    openParty: "",
+  handleUserInfo = (userId) => {
+    this.setState({userId})
+  }
+
+  handleLoginChange = (e) => {
+    this.setState({
+      [e.target.name] : e.target.value
+    })
   }
 
   handleLoginSubmit = (e) => {
@@ -51,18 +61,42 @@ class App extends Component {
        this.setState({error: json.message})
       }
     })
-
   }
 
-  handleUserInfo = (userId) => {
-    this.setState({userId})
+  handleSignupSubmit = (e) => {
+    let username = this.state.username
+    let password = this.state.password
+    if (username && password){
+      let info = {username: username, password: password}
+      fetch("https://localhost:3000/signup",{
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json",
+          "Accept" : "application/json"
+        },
+        body: JSON.stringify({
+          user: info
+        })
+      })
+      .then(rsp => rsp.json())
+      .then(json => {
+        console.log(json)
+        this.setState({
+          loggedIn: !this.state.loggedIn,
+        })
+        localStorage.setItem("token", json.jwt)
+        localStorage.setItem("user",json.user.id)
+        this.props.history.push("/parties")
+      })
+    }
+    else {
+      this.setState(prevState => ({
+        error: 'Please enter a username and password'
+      }))
+    }
   }
 
-  handleLoginChange = (e) => {
-    this.setState({
-      [e.target.name] : e.target.value
-    })
-  }
+
 
   render() {
     return (
