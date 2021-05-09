@@ -6,6 +6,7 @@ import NavigationBar from '../components/NavigationBar'
 import Home from './Home'
 import Profile from './Profile'
 import Parties from './Parties'
+import { Redirect } from "react-router-dom";
 
 class App extends Component {
 
