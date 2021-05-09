@@ -5,11 +5,8 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 
 
-class Signup extends Component {
 
-    state = {
-        active: ''
-    }
+class Signup extends Component {
 
     renderSwitch(state) {
         switch(state){
@@ -29,15 +26,12 @@ class Signup extends Component {
                                 </Form.Group>
                             </Form>
                         </Container>
+                        <Button variant="primary" type="button" className="signin" onClick={(e) => this.props.toggleLogin(e)}></Button>
                     </div>
                 )
-
-
-
-
             default:
                 return <div>
-                    <button onClick={this.props.signIn} variant="primary">Sign In</button>
+                    <button onClick={this.props.signIn} className="primary">Sign In</button>
                     <button onClick={this.props.signUp} variant="success">Sign Up</button>
                 </div>
             break;
@@ -49,7 +43,7 @@ class Signup extends Component {
     render () {
         return (
             <div>
-                {this.renderSwitch(this.state.active)}
+                {this.renderSwitch(this.props.active)}
             </div>
         )
     }

@@ -17,6 +17,7 @@ class App extends Component {
   signIn = () => {
       this.setState({
         active: 'Sign In'})
+        console.log('state is ' + this.state.active)
   }
 
   signUp = () => {
@@ -37,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <div>
+      <div className="Header">
         <NavigationBar signOut={this.signOut}/>
         <Route exact path='/' render={routerProps => <Home {...routerProps} handleUserInfo={this.handleUserInfo} signIn={this.signIn} signUp={this.signUp}/>   } />
         <Route exact path='/profile' render={routerProps => <Profile {...routerProps} /> } />
