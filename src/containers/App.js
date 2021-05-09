@@ -9,20 +9,48 @@ import Parties from './Parties'
 
 class App extends Component {
 
+  componentDidMount(){
+    let token = localStorage.getItem('token')
+    if (token) {
+      this.props.history.push("/parties")
+    }
+  }
+
   state = {
     openParty: "",
-    active: ""
   }
 
-  signIn = () => {
-      this.setState({
-        active: 'Sign In'})
-        console.log('state is ' + this.state.active)
-  }
+  handleLoginSubmit = (e) => {
+    let username = this.state.username
+    let password = this.state.password
+    let info = {username: username, password: password}
+    fetch("https://localhost:3000/login",{
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+        "Accept" : "application/json"
+      },
+      body: JSON.stringify({
+        user: info
+      })
+    })
+    .then(rsp => rsp.json())
+    .then(json => {
+      if (json.user) {
+        this.setState({
+            loggedIn: !this.state.loggedIn,
+            user: json.user.username,
+            userId: json.user.id
+        })
+        localStorage.setItem("token", json.jwt) 
+        localStorage.setItem("user",json.user.id)
+        this.props.history.push("/parties")
+     }
+     else{ 
+       this.setState({error: json.message})
+      }
+    })
 
-  signUp = () => {
-    this.setState({
-      active: 'Sign Up'})
   }
 
   handleUserInfo = (userId) => {
@@ -40,7 +68,8 @@ class App extends Component {
       <Router>
       <div className="Header">
         <NavigationBar signOut={this.signOut}/>
-        <Route exact path='/' render={routerProps => <Home {...routerProps} handleUserInfo={this.handleUserInfo} signIn={this.signIn} signUp={this.signUp}/>   } />
+        <Route exact path='/' render={routerProps => <Home {...routerProps} handleUserInfo={this.handleUserInfo} handleLoginSubmit={this.handleLoginSubmit}
+         handleLoginChange={this.handleLoginChange} />   } />
         <Route exact path='/profile' render={routerProps => <Profile {...routerProps} /> } />
         <Route exact path='/parties' render={routerProps => <Parties {...routerProps} openParty={this.state.openParty}  />} />
       </div>
