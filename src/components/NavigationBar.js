@@ -20,7 +20,6 @@ const NavigationBar = (props) => {
             <Navbar bg="transparent" variant="dark" >
               <Container className="jHeader">
                 <Nav className="mr-auto">
-                  <Nav.Link href="/about">About</Nav.Link>
                   <Nav.Link href="/profile">Profile</Nav.Link>
                   <Nav.Link href="/parties">Parties</Nav.Link>
                   <Nav.Link href="#" onSelect={logout}>Logout</Nav.Link>
@@ -32,8 +31,7 @@ const NavigationBar = (props) => {
         return (
           <Navbar bg="transparent" variant="dark" >
             <Container className="jHeader">
-            <Nav className="mr-auto">
-                  <Nav.Link href="/about">About</Nav.Link>
+                <Nav className="mr-auto">
                   <Nav.Link href="/profile">Profile</Nav.Link>
                   <Nav.Link href="/parties">Parties</Nav.Link>
                   <Nav.Link href="/login">Login</Nav.Link>
