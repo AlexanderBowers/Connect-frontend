@@ -102,7 +102,7 @@ class App extends Component {
         <Route exact path='/' render={routerProps => <Home {...routerProps} handleUserInfo={this.handleUserInfo} handleLoginSubmit={this.handleLoginSubmit}
         handleLoginChange={this.handleLoginChange} handleSignupSubmit={this.handleSignupSubmit}/> } />
         <Route exact path='/profile' render={routerProps => <Profile {...routerProps} /> } />
-        <Route exact path='/parties' render={routerProps => <Parties {...routerProps} openParty={this.state.openParty}  />} />
+        <Route exact path='/parties' render={routerProps => <Parties {...routerProps} openParty={this.state.openParty}  parties={this.state.parties}/>} />
       </div>
     </Router>
   );

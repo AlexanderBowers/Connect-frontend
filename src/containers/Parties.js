@@ -4,6 +4,7 @@ import Party from '../components/Party'
 const Parties = (props) => {
 
     function renderParties (parties) {
+        console.log(props)
         if (parties.length !== 0) {
             props.parties.map (party => {
                 return <Party party={party}/>
@@ -16,7 +17,7 @@ const Parties = (props) => {
 
     return (
         <div className="parties">
-           {renderParties(this.props.parties)}
+           {renderParties(props.parties)}
         </div>
     )
 }
